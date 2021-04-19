@@ -1,0 +1,26 @@
+name: DV8 Analysis
+
+# Controls when the action will run. 
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  dv8-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
+      - name: DV8 analysis
+        id: dv8
+        uses: archtimize/dv8-action@master
+        with: 
+          license_key: ${{ secrets.LICENSE_KEY }}
+          activation_code: ${{ secrets.ACTIVATION_CODE }}
+          source_language: java
+      - name: Store DV8 analysis
+        uses: actions/upload-artifact@v2
+        with:
+          name: dv8-output
+          path: dv8-output

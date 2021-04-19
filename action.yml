@@ -1,0 +1,35 @@
+# action.yml
+name: 'DV8 action'
+description: 'Executes DV8 analysis over a project'
+inputs:
+  license_key:
+    description: 'The license key of the product'
+    required: true
+  activation_code:
+    description: 'The activation code of the product'
+    required: true
+  source_language:
+    description: 'The language of the source code, accepted values are: java, cpp, python and ruby'
+    default: java
+    required: true
+  result_path:
+    description: 'The path of the dv8 output'
+    default: dv8-output
+    required: false
+  project_name:
+    description: 'The name of the input project'
+    default: project
+    required: false
+  project_path:
+    description: 'The path of the input project'
+    default: /github/workspace
+    required: false
+outputs:
+  project:
+    description: 'A folder named "project" that contains the content of the DV8 analysis. The folder can be then uploaded as an artifact to the workflow or interacted with in other ways'
+runs:
+  using: 'docker'
+  image: 'docker://archtimize/dv8-action:0.1'
+branding:
+  icon: 'code'
+  color: 'black'
